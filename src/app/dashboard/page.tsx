@@ -1,12 +1,16 @@
 import React from "react";
 
 type props = {
-  administrador: "admin";
+  administrador: string;
   email: string;
   numero: number;
 };
 
-export default function Dashboard(props: props) {
+export default function Dashboard({
+  administrador = "admin",
+  email,
+  numero,
+}: props) {
   return (
     <div className="min-h-screen p-8">
       <h1 className="mb-6 text-3xl font-bold">Dashboard</h1>
@@ -14,8 +18,7 @@ export default function Dashboard(props: props) {
         <p className="">
           Aquí puedes gestionar tus productos y ver estadísticas.
         </p>
-        <p>Bienvenido, {props.administrador}</p>
-        {/* Añade más contenido y funcionalidad al dashboard según tus necesidades */}
+        <p>Bienvenido, {administrador}</p>
       </div>
     </div>
   );
