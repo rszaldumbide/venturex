@@ -9,7 +9,7 @@ export const metadata = {
   title: "Venturex",
   description: "Comercio Internacional",
   //icon
-  icons: "/Logo VentureX.svg",
+  icon: "/Logo VentureX.svg",
 };
 
 export default function RootLayout({
