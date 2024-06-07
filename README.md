@@ -10,7 +10,7 @@ Los pasos a continuación para configurar y ejecutar el proyecto en tu máquina 
 
 - [Node.js](https://nodejs.org/) (versión 14.x o superior)
 
-- [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 
 ## Instalación
 
