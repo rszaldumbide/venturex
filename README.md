@@ -1,6 +1,7 @@
 # Proyecto Venturex
 
 Documentación oficial de Nextjs - > https://nextjs.org/docs
+
 Documentación oficial de los estilos "Shadcn/ui" ->https://ui.shadcn.com/
 
 Los pasos a continuación para configurar y ejecutar el proyecto en tu máquina local.
@@ -8,6 +9,7 @@ Los pasos a continuación para configurar y ejecutar el proyecto en tu máquina 
 ## Prerrequisitos
 
 - [Node.js](https://nodejs.org/) (versión 14.x o superior)
+
 - [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
 
 ## Instalación
