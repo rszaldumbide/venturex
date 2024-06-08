@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import ValoresComponent from "@/components/valores";
+import MissionVisionComponent from "@/components/misionvision";
+import ServiceCard from "@/components/ServiceCard";
+import Footer from "@/components/Footer";
 
 const images = [
   "/imgs/carrousel/1.jpg",
@@ -45,6 +48,37 @@ const valores = [
     title: "Constancia",
     description:
       "Mantenemos un esfuerzo continuo en la prestación de nuestros servicios para asegurar la satisfacción y el crecimiento de clientes, recibiendo el apoyo necesario en cada momento del crecimiento de sus negocios.",
+  },
+];
+
+const servicios = [
+  {
+    imgSrc: "/imgs/servicios/1.jpg",
+    altText: "Servicio 1",
+    title: "Investigación de Mercado Internacional",
+    description:
+      "Proveer datos y análisis sobre mercados globales para ayudar a las empresas a tomar decisiones informadas.",
+  },
+  {
+    imgSrc: "/imgs/servicios/2.jpg",
+    altText: "Servicio 2",
+    title: "Asesoramiento Legal y Regulatorio para Exportadores",
+    description:
+      "Brindar orientación legal y regulatoria para asegurar el cumplimiento en los mercados de destino.",
+  },
+  {
+    imgSrc: "/imgs/servicios/3.jpg",
+    altText: "Servicio 3",
+    title: "Asesoramiento en Acuerdos Comerciales Internacionales",
+    description:
+      "Asistir a las empresas en la negociación y formalización de acuerdos comerciales.",
+  },
+  {
+    imgSrc: "/imgs/servicios/4.jpg",
+    altText: "Servicio 4",
+    title: "Inteligencia Competitiva Internacional",
+    description:
+      "Ayudar a los clientes a comprender la competencia y el entorno competitivo global.",
   },
 ];
 
@@ -136,84 +170,59 @@ function HomePage() {
           Nuestros servicios
         </h1>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
-          <Card>
-            <CardContent>
-              <Image
-                src="/imgs/services/1.jpg"
-                alt="Servicio 1"
-                width={300}
-                height={200}
-                className="rounded-lg"
-              />
-              <h2 className="text-xl font-semibold text-cyan-700">
-                Investigación de Mercado Internacional
-              </h2>
-              <p className="text-gray-600">
-                Proveer datos y análisis sobre mercados globales para ayudar a
-                las empresas a tomar decisiones informadas.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent>
-              <Image
-                src="/imgs/services/2.jpg"
-                alt="Servicio 2"
-                width={300}
-                height={200}
-                className="rounded-lg"
-              />
-              <h2 className="text-xl font-semibold text-cyan-700">
-                Asesoramiento Legal y Regulatorio para Exportadores
-              </h2>
-              <p className="text-gray-600">
-                Brindar orientación legal y regulatoria para asegurar el
-                cumplimiento en los mercados de destino.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent>
-              <Image
-                src="/imgs/services/3.jpg"
-                alt="Servicio 3"
-                width={300}
-                height={200}
-                className="rounded-lg"
-              />
-              <h2 className="text-xl font-semibold text-cyan-700">
-                Asesoramiento en Acuerdos Comerciales Internacionales
-              </h2>
-              <p className="text-gray-600">
-                Asistir a las empresas en la negociación y formalización de
-                acuerdos comerciales.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent>
-              <Image
-                src="/imgs/services/3.jpg"
-                alt="Servicio 4"
-                width={300}
-                height={200}
-                className="rounded-lg"
-              />
-              <h2 className="text-xl font-semibold text-cyan-700">
-                Inteligencia Competitiva Internacional
-              </h2>
-              <p className="text-gray-600">
-                Ayudar a los clientes a comprender la competencia y el entorno
-                competitivo global.
-              </p>
-            </CardContent>
-          </Card>
+          {servicios.map((servicio, index) => (
+            <ServiceCard
+              key={index}
+              imgSrc={servicio.imgSrc}
+              altText={servicio.altText}
+              title={servicio.title}
+              description={servicio.description}
+            />
+          ))}
         </div>
       </div>
 
       <br />
       {/* Valores empresariales */}
       <ValoresComponent valores={valores} />
+
+      <br />
+      {/* mision vision */}
+      <div>
+        <h2 className="mb-6 mt-4 text-center text-3xl font-semibold text-cyan-800">
+          Misión - Visión
+        </h2>
+        <MissionVisionComponent />
+      </div>
+
+      <br />
+      {/* CTA */}
+      <div className="container mt-8 max-w-4xl text-center">
+        <h1 className="text-center text-3xl font-semibold text-cyan-800">
+          ¿Listo para expandir tu empresa?
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">
+          Contáctanos para obtener más información sobre nuestros servicios y
+          cómo podemos ayudarte a internacionalizar tu empresa.
+        </p>
+        {/* wa.link */}
+        <Button
+          className="mt-4"
+          onClick={() => {
+            window.open(
+              "https://wa.me/593963266372?text=Hola!%20somos%20*VentureX*,%20somos%20una%20plataforma%20digital%20que%20facilita%20la%20expansión%20internacional%20de%20empresas,%20en%20que%20te%20podemos%20ayudar?😀",
+              "_blank",
+            );
+          }}
+        >
+          Contáctanos
+        </Button>
+      </div>
+
+      <br />
+
+      {/* footer */}
+      <Footer />
     </div>
   );
 }
