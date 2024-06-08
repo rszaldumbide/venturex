@@ -17,6 +17,7 @@ import ValoresComponent from "@/components/valores";
 import MissionVisionComponent from "@/components/misionvision";
 import ServiceCard from "@/components/ServiceCard";
 import Footer from "@/components/Footer";
+import CountryList from "@/components/CountryList";
 
 const images = [
   "/imgs/carrousel/1.jpg",
@@ -220,6 +221,9 @@ function HomePage() {
       </div>
 
       <br />
+
+      {/* paises */}
+      <CountryList />
 
       {/* footer */}
       <Footer />
