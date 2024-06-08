@@ -89,7 +89,7 @@ function HomePage() {
 
       {/* cards */}
       <div className="container mt-4 max-w-6xl">
-        <h1 className="text-4xl font-semibold text-gray-800">
+        <h1 className="text-4xl font-semibold text-gray-800 text-center">
           Bienvenido a VentureX
         </h1>
         <p className="mt-4 text-justify text-lg text-gray-600">
