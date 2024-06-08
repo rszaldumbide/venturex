@@ -13,11 +13,39 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import ValoresComponent from "@/components/valores";
 
 const images = [
   "/imgs/carrousel/1.jpg",
   "/imgs/carrousel/2.jpg",
   "/imgs/carrousel/3.jpg",
+];
+
+const valores = [
+  {
+    icon: "superacion",
+    title: "Superación",
+    description:
+      "Nos esforzamos constantemente por superar las expectativas de nuestros clientes. Valoramos el crecimiento y la evolución continua, tanto de nuestra plataforma como de las empresas que servimos. Creemos en el poder de la ambición y la determinación para alcanzar nuevos horizontes y transformar desafíos en oportunidades.",
+  },
+  {
+    icon: "innovacion",
+    title: "Innovación",
+    description:
+      "Creemos en la implementación de soluciones tecnológicas avanzadas y creativas que transformen la manera en que las empresas abordan el comercio internacional.",
+  },
+  {
+    icon: "compromiso",
+    title: "Compromiso",
+    description:
+      "Estamos dedicados a promover la expansión y el éxito de nuestros clientes. Nuestro compromiso se refleja en la calidad de los servicios que ofrecemos y en el apoyo constante que brindamos a lo largo del proceso de internacionalización.",
+  },
+  {
+    icon: "constancia",
+    title: "Constancia",
+    description:
+      "Mantenemos un esfuerzo continuo en la prestación de nuestros servicios para asegurar la satisfacción y el crecimiento de clientes, recibiendo el apoyo necesario en cada momento del crecimiento de sus negocios.",
+  },
 ];
 
 function HomePage() {
@@ -87,32 +115,105 @@ function HomePage() {
         </div>
       </div>
 
+      <br />
+
       {/* cards */}
-      <div className="container mt-4 max-w-6xl">
-        <h1 className="text-4xl font-semibold text-gray-800 text-center">
+      <div className="container mt-4 max-w-4xl text-center">
+        <h1 className="text-center text-4xl font-semibold text-cyan-800">
           Bienvenido a VentureX
         </h1>
-        <p className="mt-4 text-justify text-lg text-gray-600">
-          Venturex es una plataforma digital que facilita la expansión
-          internacional de empresas mediante servicios integrados de
-          inteligencia de negocios, investigación de mercado y asesoramiento
-          legal. Su misión es ayudar a empresas de todos los tamaños a
-          comprender y navegar el comercio global, estableciendo relaciones
-          duraderas con los clientes. Con el objetivo de ser líder en conexiones
-          comerciales globales en cinco años, Venturex emplea tecnología
-          avanzada e innovación. Sus valores incluyen la superación, la
-          innovación, el compromiso y la constancia, y sus servicios clave
-          abarcan la investigación de mercado internacional, asesoramiento
-          legal, acuerdos comerciales e inteligencia competitiva.
+        <p className="mt-4 text-lg text-gray-600">
+          Plataforma digital que facilita la expansión internacional de empresas
+          mediante servicios integrados de inteligencia de negocios,
+          investigación de mercado y asesoramiento legal.
         </p>
-        <div className="mt-4">
-          <Link href="/register" legacyBehavior>
-            <Button>
-              <a>Register</a>
-            </Button>
-          </Link>
+      </div>
+
+      <br />
+      {/* Servicios clavex */}
+      <div className="max-w-8xl container mt-8">
+        <h1 className="mb-6 text-center text-3xl font-semibold text-cyan-800">
+          Nuestros servicios
+        </h1>
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
+          <Card>
+            <CardContent>
+              <Image
+                src="/imgs/services/1.jpg"
+                alt="Servicio 1"
+                width={300}
+                height={200}
+                className="rounded-lg"
+              />
+              <h2 className="text-xl font-semibold text-cyan-700">
+                Investigación de Mercado Internacional
+              </h2>
+              <p className="text-gray-600">
+                Proveer datos y análisis sobre mercados globales para ayudar a
+                las empresas a tomar decisiones informadas.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent>
+              <Image
+                src="/imgs/services/2.jpg"
+                alt="Servicio 2"
+                width={300}
+                height={200}
+                className="rounded-lg"
+              />
+              <h2 className="text-xl font-semibold text-cyan-700">
+                Asesoramiento Legal y Regulatorio para Exportadores
+              </h2>
+              <p className="text-gray-600">
+                Brindar orientación legal y regulatoria para asegurar el
+                cumplimiento en los mercados de destino.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent>
+              <Image
+                src="/imgs/services/3.jpg"
+                alt="Servicio 3"
+                width={300}
+                height={200}
+                className="rounded-lg"
+              />
+              <h2 className="text-xl font-semibold text-cyan-700">
+                Asesoramiento en Acuerdos Comerciales Internacionales
+              </h2>
+              <p className="text-gray-600">
+                Asistir a las empresas en la negociación y formalización de
+                acuerdos comerciales.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent>
+              <Image
+                src="/imgs/services/3.jpg"
+                alt="Servicio 4"
+                width={300}
+                height={200}
+                className="rounded-lg"
+              />
+              <h2 className="text-xl font-semibold text-cyan-700">
+                Inteligencia Competitiva Internacional
+              </h2>
+              <p className="text-gray-600">
+                Ayudar a los clientes a comprender la competencia y el entorno
+                competitivo global.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
+
+      <br />
+      {/* Valores empresariales */}
+      <ValoresComponent valores={valores} />
     </div>
   );
 }
