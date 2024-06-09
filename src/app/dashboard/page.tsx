@@ -11,7 +11,7 @@ const handleClick = (link: string) => {
   window.open(link, "_blank");
 };
 const cards = [
-    { title: "Investigación del Mercado", icon: "fa-chart-line", link: "https://www.ejemploinvestigacionmercado.com" },
+    { title: "Investigación del Mercado", icon: "fa-chart-line", link: "/market" },
     { title: "Asesoramiento Legal y Regulatorio", icon: "fa-balance-scale", link: "https://www.ejemploasesorialegal.com" },
     { title: "Acuerdos Comerciales Internacionales", icon: "fa-handshake", link: "https://www.ejemploacuerdoscomerciales.com" },
     { title: "Inteligencia Competitiva Internacional", icon: "fa-binoculars", link: "https://www.ejemplointeligenciacompetitiva.com" },
@@ -27,12 +27,11 @@ export default function Dashboard({ administrador = "admin", email, numero }: pr
     
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-green-500 text-white p-8">
-      {/* Botón Hamburguesa (visible solo en pantallas pequeñas y medianas) */}
       <button onClick={toggleMenu} className=" fixed top-4 left-4 text-white text-2xl">
         <i className="fas fa-bars"></i> 
       </button>
 
-      <aside className={`fixed top-0 left-0 h-screen w-64 bg-white bg-opacity-20 shadow-lg transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed top-0 left-0 h-screen w-64 bg-white bg-opacity-40 shadow-lg transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <button onClick={toggleMenu} className="absolute top-4 right-4 text-white text-2xl">
           <i className="fas fa-times"></i> 
         </button>
@@ -43,14 +42,23 @@ export default function Dashboard({ administrador = "admin", email, numero }: pr
               <li key={index} className="mb-2">
                 <a 
                   href={card.link} 
-                  target="_blank"
                   rel="noopener noreferrer" 
                   className="block py-2 px-4 rounded hover:bg-blue-600 hover:text-white"
                 >
                   <i className={`fas ${card.icon} mr-2`}></i> {card.title}
                 </a>
+                
               </li>
+              
             ))}
+            <li>
+              
+              <a
+              rel="noopener noreferrer"  
+              className="block py-2 px-4 rounded hover:bg-blue-600 hover:text-white">
+              <i className="fas fa-gear pr-3"></i>Configuración</a>
+              
+            </li>
           </ul>
         </div>
       </aside>
@@ -64,7 +72,6 @@ export default function Dashboard({ administrador = "admin", email, numero }: pr
           <a 
           key={index} 
           href={card.link} 
-          target="_blank"
           rel="noopener noreferrer" 
           className="bg-white bg-opacity-20 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center cursor-pointer"
         >
