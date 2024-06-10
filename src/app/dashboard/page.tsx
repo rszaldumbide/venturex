@@ -54,7 +54,7 @@ export default function Dashboard({
       </button>
 
       <aside
-        className={`fixed left-0 top-0 h-screen bg-green-500 w-64 transform bg-white bg-opacity-40 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed left-0 top-0 h-screen bg-green-600 w-64 transform bg-white bg-opacity-60 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <button
           onClick={toggleMenu}
