@@ -9,7 +9,6 @@ import worldMapData from "../../public/json/world-110m.json";
 
 interface Country {
   name: string;
-  code: string;
 }
 
 interface MapChartProps {
@@ -17,11 +16,12 @@ interface MapChartProps {
 }
 
 const MapChart: React.FC<MapChartProps> = ({ onCountrySelect }) => {
-  const handleCountryClick = (geo: GeographyProps["geography"]) => {
-    const { NAME, ISO_A3 } = geo.properties;
-    const selectedCountry = { name: NAME, code: ISO_A3 };
-    console.log("Selected Country:", selectedCountry); // Agregar este console.log
-    onCountrySelect(selectedCountry);
+  const handleCountryClick = (
+    geo: GeographyProps & { properties: { NAME: string } },
+  ) => {
+    onCountrySelect({ name: geo.properties.NAME });
+    //ver en consolor log
+    console.log(geo.properties);
   };
 
   return (

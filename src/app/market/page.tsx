@@ -129,12 +129,15 @@ const Dashboard: React.FC = () => {
 
       <div>
         <h1>Mapa Mundial Interactivo</h1>
-        <MapChart onCountrySelect={setSelectedCountry} />
+        <MapChart 
+          onCountrySelect={(country) => setSelectedCountry(
+            country as Country
+          )}
+        />
         {selectedCountry && (
           <div>
             <h2>Selected Country:</h2>
             <p>{selectedCountry.name}</p>
-            <p>{selectedCountry.code}</p>
           </div>
         )}
       </div>
