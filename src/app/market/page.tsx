@@ -12,25 +12,27 @@ import {
   MenuItem,
   Box,
   Button,
+  Paper,
 } from "@mui/material";
 import {
   Search as SearchIcon,
   Notifications as NotificationsIcon,
-  AccountCircle as AccountCircleIcon,
   Settings as SettingsIcon,
 } from "@mui/icons-material";
-
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import MapChart from "@/components/MapChart";
 
-import { Paper } from "@mui/material";
+interface Country {
+  name: string;
+}
 
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
-
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [megaMenuAnchorEl, setMegaMenuAnchorEl] = useState<null | HTMLElement>(
     null,
   );
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -48,6 +50,10 @@ const Dashboard = () => {
     setMegaMenuAnchorEl(null);
   };
 
+  const handleCountrySelect = (country: Country) => {
+    setSelectedCountry(country);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -55,7 +61,6 @@ const Dashboard = () => {
         position="static"
       >
         <Toolbar>
-          {/* Logo y Barra de Búsqueda (agrupados) */}
           <Box sx={{ display: "flex", alignItems: "center", padding: "10px" }}>
             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
               VentureX
@@ -81,7 +86,6 @@ const Dashboard = () => {
             </Paper>
           </Box>
 
-          {/* Mega Menú (Dropdown) */}
           <Button
             color="inherit"
             endIcon={<KeyboardArrowDownIcon />}
@@ -95,12 +99,17 @@ const Dashboard = () => {
             open={Boolean(megaMenuAnchorEl)}
             onClose={handleMegaMenuClose}
           >
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-map pr-1"></i> Mapa</MenuItem>
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-chart-bar pr-1"></i> Estadística</MenuItem>
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-file-alt pr-1"></i>Informes</MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-map pr-1"></i> Mapa
+            </MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-chart-bar pr-1"></i> Estadística
+            </MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-file-alt pr-1"></i>Informes
+            </MenuItem>
           </Menu>
 
-          {/* Elementos a la derecha (notificaciones, perfil, configuración) */}
           <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -127,7 +136,24 @@ const Dashboard = () => {
         </Toolbar>
       </AppBar>
 
-      {/* ... (Contenido principal del dashboard) */}
+      <div className="p-8">
+        <h1 className="mb-4 text-center text-2xl font-bold">
+          Investigación de Mercado
+        </h1>
+        <p className="mb-4 text-center text-lg">Selecciona un país:</p>
+        {selectedCountry && (
+          <p className="mb-4 text-center text-lg">
+            <span className="font-semibold">País seleccionado:</span>{" "}
+            {selectedCountry.name}
+            {/*  */}
+          </p>
+        )}
+        <div className="flex justify-center text-center w-full">
+          <div className="h-[500px] w-[1400px]">
+            <MapChart onCountrySelect={handleCountrySelect} />
+          </div>
+        </div>
+      </div>
     </Box>
   );
 };
