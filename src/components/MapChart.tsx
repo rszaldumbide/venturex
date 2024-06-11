@@ -17,15 +17,22 @@ interface MapChartProps {
 
 const MapChart: React.FC<MapChartProps> = ({ onCountrySelect }) => {
   const handleCountryClick = (
-    geo: GeographyProps & { properties: { NAME: string } },
+    geo: GeographyProps & { properties: 
+      { name: string }
+     },
   ) => {
-    onCountrySelect({ name: geo.properties.NAME });
-    console.log(geo.properties); // Ver en consola
+    onCountrySelect(
+      {
+        name: geo.properties.name,
+      },
+    );
+    // Ver en consola log
+    console.log(geo.properties);
   };
 
   return (
-    <div>
-      <ComposableMap>
+    <div className="flex justify-center">
+      <ComposableMap className="w-full h-full">
         <Geographies geography={worldMapData}>
           {({ geographies }) =>
             geographies.map((geo) => (

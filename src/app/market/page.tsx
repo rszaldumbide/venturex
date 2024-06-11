@@ -45,11 +45,11 @@ const Dashboard: React.FC = () => {
   const handleMegaMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMegaMenuAnchorEl(event.currentTarget);
   };
-  
+
   const handleMegaMenuClose = () => {
     setMegaMenuAnchorEl(null);
   };
-  
+
   const handleCountrySelect = (country: Country) => {
     setSelectedCountry(country);
   };
@@ -136,10 +136,23 @@ const Dashboard: React.FC = () => {
         </Toolbar>
       </AppBar>
 
-      <div>
-        <h1>Mapa Mundial Interactivo</h1>
-        <MapChart onCountrySelect={handleCountrySelect} />
-        {selectedCountry && <p>País seleccionado: {selectedCountry.name}</p>}
+      <div className="p-8">
+        <h1 className="mb-4 text-center text-2xl font-bold">
+          Investigación de Mercado
+        </h1>
+        <p className="mb-4 text-center text-lg">Selecciona un país:</p>
+        {selectedCountry && (
+          <p className="mb-4 text-center text-lg">
+            <span className="font-semibold">País seleccionado:</span>{" "}
+            {selectedCountry.name}
+            {/*  */}
+          </p>
+        )}
+        <div className="flex justify-center text-center w-full">
+          <div className="h-[500px] w-[1400px]">
+            <MapChart onCountrySelect={handleCountrySelect} />
+          </div>
+        </div>
       </div>
     </Box>
   );
