@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import dynamic from "next/dynamic";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 
 const DynamicMapChart = dynamic(() => import("@/components/MapChart"), {
   ssr: false,
