@@ -20,8 +20,7 @@ const MapChart: React.FC<MapChartProps> = ({ onCountrySelect }) => {
     geo: GeographyProps & { properties: { NAME: string } },
   ) => {
     onCountrySelect({ name: geo.properties.NAME });
-    //ver en consolor log
-    console.log(geo.properties);
+    console.log(geo.properties); // Ver en consola
   };
 
   return (

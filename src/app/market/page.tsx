@@ -20,12 +20,11 @@ import {
   Settings as SettingsIcon,
 } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import MapChart from "@/components/MapChart";
 
 interface Country {
   name: string;
-  code: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -46,9 +45,13 @@ const Dashboard: React.FC = () => {
   const handleMegaMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMegaMenuAnchorEl(event.currentTarget);
   };
-
+  
   const handleMegaMenuClose = () => {
     setMegaMenuAnchorEl(null);
+  };
+  
+  const handleCountrySelect = (country: Country) => {
+    setSelectedCountry(country);
   };
 
   return (
@@ -96,9 +99,15 @@ const Dashboard: React.FC = () => {
             open={Boolean(megaMenuAnchorEl)}
             onClose={handleMegaMenuClose}
           >
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-map pr-1"></i> Mapa</MenuItem>
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-chart-bar pr-1"></i> Estadística</MenuItem>
-            <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-file-alt pr-1"></i>Informes</MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-map pr-1"></i> Mapa
+            </MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-chart-bar pr-1"></i> Estadística
+            </MenuItem>
+            <MenuItem onClick={handleMegaMenuClose}>
+              <i className="fas fa-file-alt pr-1"></i>Informes
+            </MenuItem>
           </Menu>
 
           <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
@@ -129,17 +138,8 @@ const Dashboard: React.FC = () => {
 
       <div>
         <h1>Mapa Mundial Interactivo</h1>
-        <MapChart 
-          onCountrySelect={(country) => setSelectedCountry(
-            country as Country
-          )}
-        />
-        {selectedCountry && (
-          <div>
-            <h2>Selected Country:</h2>
-            <p>{selectedCountry.name}</p>
-          </div>
-        )}
+        <MapChart onCountrySelect={handleCountrySelect} />
+        {selectedCountry && <p>País seleccionado: {selectedCountry.name}</p>}
       </div>
     </Box>
   );
