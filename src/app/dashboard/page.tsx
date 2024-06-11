@@ -49,6 +49,8 @@ export default function Dashboard({
       <button
         onClick={toggleMenu}
         className="fixed left-4 top-4 text-2xl text-white"
+        title="open menu"
+
       >
         <i className="fas fa-bars"></i>
       </button>
@@ -59,6 +61,7 @@ export default function Dashboard({
         <button
           onClick={toggleMenu}
           className="absolute right-4 top-4 text-2xl text-white"
+          title="Cerrar menú"
         >
           <i className="fas fa-times"></i>
         </button>
