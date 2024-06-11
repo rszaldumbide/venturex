@@ -12,25 +12,28 @@ import {
   MenuItem,
   Box,
   Button,
+  Paper,
 } from "@mui/material";
 import {
   Search as SearchIcon,
   Notifications as NotificationsIcon,
-  AccountCircle as AccountCircleIcon,
   Settings as SettingsIcon,
 } from "@mui/icons-material";
-
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
-import { Paper } from "@mui/material";
-
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import MapChart from "@/components/MapChart";
 
-const Dashboard = () => {
+interface Country {
+  name: string;
+  code: string;
+}
+
+const Dashboard: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [megaMenuAnchorEl, setMegaMenuAnchorEl] = useState<null | HTMLElement>(
     null,
   );
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,7 +58,6 @@ const Dashboard = () => {
         position="static"
       >
         <Toolbar>
-          {/* Logo y Barra de Búsqueda (agrupados) */}
           <Box sx={{ display: "flex", alignItems: "center", padding: "10px" }}>
             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
               VentureX
@@ -81,7 +83,6 @@ const Dashboard = () => {
             </Paper>
           </Box>
 
-          {/* Mega Menú (Dropdown) */}
           <Button
             color="inherit"
             endIcon={<KeyboardArrowDownIcon />}
@@ -100,7 +101,6 @@ const Dashboard = () => {
             <MenuItem onClick={handleMegaMenuClose}><i className="fas fa-file-alt pr-1"></i>Informes</MenuItem>
           </Menu>
 
-          {/* Elementos a la derecha (notificaciones, perfil, configuración) */}
           <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -127,7 +127,17 @@ const Dashboard = () => {
         </Toolbar>
       </AppBar>
 
-      {/* ... (Contenido principal del dashboard) */}
+      <div>
+        <h1>Mapa Mundial Interactivo</h1>
+        <MapChart onCountrySelect={setSelectedCountry} />
+        {selectedCountry && (
+          <div>
+            <h2>Selected Country:</h2>
+            <p>{selectedCountry.name}</p>
+            <p>{selectedCountry.code}</p>
+          </div>
+        )}
+      </div>
     </Box>
   );
 };
