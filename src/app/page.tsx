@@ -99,80 +99,53 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="m-1">
+    <div className="">
       <div>
         <NavbarHome />
       </div>
 
-      <div className="relative w-full" data-carousel="slide">
-        <Carousel className="m-4">
-          <CarouselContent>
-            {images.map((image, index) => (
-              <CarouselItem
-                key={index}
-                className={`transition-opacity duration-700 ease-in-out ${
-                  index === currentIndex ? "block" : "hidden"
-                }`}
-              >
+      
+      
+    <div className="relative w-full" data-carousel="slide">
+      <Carousel className="m-4">
+        <CarouselContent>
+          {images.map((image, index) => (
+            <CarouselItem
+              key={index}
+              className={`transition-opacity duration-700 ease-in-out ${index === currentIndex ? "block" : "hidden"}`}
+            >
+              <div className="relative w-full h-96"> {/* Ajusta la altura según tus necesidades */}
                 <Image
                   src={image}
                   alt={`VentureX ${index + 1}`}
-                  width={1400}
-                  height={600}
+                  layout="fill"
+                  objectFit="cover"
                   className="rounded-lg"
                 />
-                <div className="absolute bottom-4 left-1/2 w-full -translate-x-1/2 transform rounded-sm bg-opacity-50 p-4 text-2xl font-semibold text-white backdrop-blur-md backdrop-filter">
-                  {index === 0 && (
-                    <p className="ml-4 text-opacity-100">
-                      Plataforma de Comercio Internacional
-                    </p>
-                  )}
-                  {index === 1 && (
-                    <p className="ml-4 text-opacity-100">
-                      Datos Estadísticos de importaciones de negocios
-                    </p>
-                  )}
-                  {index === 2 && (
-                    <p className="ml-4 text-opacity-100">
-                      Conoce mas sobre tus productos y su mercado
-                    </p>
-                  )}
-                  {index === 3 && (
-                    <p className="ml-4 text-opacity-100">
-                      Asesoria Legal y tributaria
-                    </p>
-                  )}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious
-            onClick={() =>
-              setCurrentIndex(
-                (prevIndex) => (prevIndex - 1 + images.length) % images.length,
-              )
-            }
-          />
-          <CarouselNext
-            onClick={() =>
-              setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-            }
-          />
-        </Carousel>
-        <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`h-3 w-3 rounded-full ${
-                index === currentIndex ? "bg-sky-900" : "bg-gray-300"
-              }`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Slide ${index + 1}`}
-            ></button>
+              </div>
+              <div className="absolute bottom-4 left-1/2 w-full -translate-x-1/2 transform rounded-sm bg-opacity-50 p-4 text-2xl font-semibold text-white backdrop-blur-md backdrop-filter">
+                {index === 0 && <p className="ml-4 text-opacity-100">Plataforma de Comercio Internacional</p>}
+                {index === 1 && <p className="ml-4 text-opacity-100">Datos Estadísticos de importaciones de negocios</p>}
+                {index === 2 && <p className="ml-4 text-opacity-100">Conoce más sobre tus productos y su mercado</p>}
+                {index === 3 && <p className="ml-4 text-opacity-100">Asesoría Legal y tributaria</p>}
+              </div>
+            </CarouselItem>
           ))}
-        </div>
+        </CarouselContent>
+        
+      </Carousel>
+      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            className={`h-3 w-3 rounded-full ${index === currentIndex ? "bg-sky-900" : "bg-gray-300"}`}
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
+        ))}
       </div>
+    </div>
 
       <br />
 
