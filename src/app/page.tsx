@@ -23,10 +23,10 @@ import { Icon } from "@mui/material";
 import { FaWhatsapp } from "react-icons/fa";
 
 const images = [
-  "/imgs/carrousel/1.jpg",
-  "/imgs/carrousel/2.jpg",
-  "/imgs/carrousel/3.jpg",
-  "/imgs/carrousel/4.jpg",
+  { src: "/imgs/carrousel/1.jpg", text: "Plataforma de Comercio Internacional" },
+  { src: "/imgs/carrousel/2.jpg", text: "Datos Estadísticos de importaciones de negocios" },
+  { src: "/imgs/carrousel/3.jpg", text: "Conoce más sobre tus productos y su mercado" },
+  { src: "/imgs/carrousel/4.jpg", text: "Asesoría Legal y tributaria" },
 ];
 
 const valores = [
@@ -87,6 +87,8 @@ const servicios = [
   },
 ];
 
+
+
 function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -106,40 +108,37 @@ function HomePage() {
 
       
       
-    <div className="relative w-full" data-carousel="slide">
-      <Carousel className="m-4">
-        <CarouselContent>
-          {images.map((image, index) => (
-            <CarouselItem
-              key={index}
-              className={`transition-opacity duration-700 ease-in-out ${index === currentIndex ? "block" : "hidden"}`}
-            >
-              <div className="relative w-full h-96"> {/* Ajusta la altura según tus necesidades */}
-                <Image
-                  src={image}
-                  alt={`VentureX ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
-                />
-              </div>
-              <div className="absolute bottom-4 left-1/2 w-full -translate-x-1/2 transform rounded-sm bg-opacity-50 p-4 text-2xl font-semibold text-white backdrop-blur-md backdrop-filter">
-                {index === 0 && <p className="ml-4 text-opacity-100">Plataforma de Comercio Internacional</p>}
-                {index === 1 && <p className="ml-4 text-opacity-100">Datos Estadísticos de importaciones de negocios</p>}
-                {index === 2 && <p className="ml-4 text-opacity-100">Conoce más sobre tus productos y su mercado</p>}
-                {index === 3 && <p className="ml-4 text-opacity-100">Asesoría Legal y tributaria</p>}
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        
-      </Carousel>
+      <div className="relative w-full" data-carousel="slide">
+        <Carousel className="mt-4">
+          <CarouselContent>
+            {images.map((image, index) => (
+              <CarouselItem
+                key={index}
+                className={`transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "block" : "hidden"}`}
+              >
+                <div className="relative w-full h-96"> 
+                  <Image
+                    src={image.src}
+                    alt={`VentureX ${index + 1}`}
+                    layout="fill"
+                    objectFit="cover"
+                    className=""
+                  />
+                  {/* Contenedor del texto */}
+                  <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-right">
+                    <h2 className="text-4xl font-bold text-white mb-4 text-right">{image.text}</h2>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
         {images.map((_, index) => (
           <button
             key={index}
             type="button"
-            className={`h-3 w-3 rounded-full ${index === currentIndex ? "bg-sky-900" : "bg-gray-300"}`}
+            className={`h-1 w-3 rounded-full ${index === currentIndex ? "bg-blue-800" : "bg-white"}`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Slide ${index + 1}`}
           ></button>
