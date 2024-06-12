@@ -18,11 +18,15 @@ import MissionVisionComponent from "@/components/misionvision";
 import ServiceCard from "@/components/ServiceCard";
 import Footer from "@/components/Footer";
 import CountryList from "@/components/CountryList";
+import { Icon } from "@mui/material";
+/* react icons */
+import { FaWhatsapp } from "react-icons/fa";
 
 const images = [
   "/imgs/carrousel/1.jpg",
   "/imgs/carrousel/2.jpg",
   "/imgs/carrousel/3.jpg",
+  "/imgs/carrousel/4.jpg",
 ];
 
 const valores = [
@@ -96,12 +100,10 @@ function HomePage() {
 
   return (
     <div className="m-1">
-      {/* nav bar */}
       <div>
         <NavbarHome />
       </div>
 
-      {/* carousel */}
       <div className="relative w-full" data-carousel="slide">
         <Carousel className="m-4">
           <CarouselContent>
@@ -119,6 +121,28 @@ function HomePage() {
                   height={600}
                   className="rounded-lg"
                 />
+                <div className="absolute bottom-4 left-1/2 w-full -translate-x-1/2 transform rounded-sm bg-opacity-50 p-4 text-2xl font-semibold text-white backdrop-blur-md backdrop-filter">
+                  {index === 0 && (
+                    <p className="ml-4 text-opacity-100">
+                      Plataforma de Comercio Internacional
+                    </p>
+                  )}
+                  {index === 1 && (
+                    <p className="ml-4 text-opacity-100">
+                      Datos Estadísticos de importaciones de negocios
+                    </p>
+                  )}
+                  {index === 2 && (
+                    <p className="ml-4 text-opacity-100">
+                      Conoce mas sobre tus productos y su mercado
+                    </p>
+                  )}
+                  {index === 3 && (
+                    <p className="ml-4 text-opacity-100">
+                      Asesoria Legal y tributaria
+                    </p>
+                  )}
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -208,7 +232,7 @@ function HomePage() {
         </p>
         {/* wa.link */}
         <Button
-          className="mt-4"
+          className="mt-4 bg-green-400"
           onClick={() => {
             window.open(
               "https://wa.me/593963266372?text=Hola!%20somos%20*VentureX*,%20somos%20una%20plataforma%20digital%20que%20facilita%20la%20expansión%20internacional%20de%20empresas,%20en%20que%20te%20podemos%20ayudar?😀",
@@ -216,12 +240,14 @@ function HomePage() {
             );
           }}
         >
+          {/* icono de ws */}
+          <FaWhatsapp className="mr-2" />
           Contáctanos
         </Button>
       </div>
 
       <br />
-
+      <br />
       {/* paises */}
       <CountryList />
 
