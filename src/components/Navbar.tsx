@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ModeToggle } from "@/components/ModeToggle";
 import {
   AppBar,
   Toolbar,
@@ -49,36 +52,29 @@ const Navbar: React.FC<NavbarProps> = ({ onMegaMenuOpen }) => {
 
   return (
     <AppBar
-      className="bg-gradient-to-br from-blue-500 to-green-600 px-2 text-white"
+      className="bg-gradient-to-br from-blue-700 to-blue-300 px-2 text-white"
       position="static"
     >
       <Toolbar>
         {/* Sección del logo y buscador */}
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, padding: "10px" }}>
-          <Typography variant="h6" component="div" sx={{ mr: 2 }}>
-            VentureX
-          </Typography>
+        <Link href="/" legacyBehavior>
+          <a className="flex items-center">
+            <Image
+              src="/Logo VentureX.svg"
+              alt="VentureX"
+              width={40}
+              height={40}
+              className="h-10 w-10"
+            />
+            <span className="ml-2 text-lg font-semibold text-teal-50">
+              VentureX
+            </span>
+          </a>
+        </Link>
           {/* Esconder el buscador en pantallas pequeñas */}
           <Hidden smDown>
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: 300,
-                borderRadius: 25,
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                color: "white",
-              }}
-            >
-              <SearchIcon sx={{ p: "0px" }} />
-              <InputBase
-                sx={{ ml: 1, flex: 1, color: "white" }}
-                placeholder="Buscar…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Paper>
+            
           </Hidden>
         </Box>
 
@@ -97,15 +93,17 @@ const Navbar: React.FC<NavbarProps> = ({ onMegaMenuOpen }) => {
           onClose={handleMegaMenuClose}
         >
           <MenuItem onClick={handleMegaMenuClose}>
-            <i className="fas fa-map pr-1"></i> Mapa
+            <i className="fas fa-map pr-2"></i> Mapa
           </MenuItem>
           <MenuItem onClick={handleMegaMenuClose}>
-            <i className="fas fa-chart-bar pr-1"></i> Estadística
+            <i className="fas fa-chart-bar pr-2"></i> Estadística
           </MenuItem>
           <MenuItem onClick={handleMegaMenuClose}>
-            <i className="fas fa-file-alt pr-1"></i>Informes
+            <i className="fas fa-file-alt pr-3"></i>Informes
           </MenuItem>
         </Menu>
+
+        
 
         {/* Sección de iconos (ajustada para ser responsive) */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -117,7 +115,8 @@ const Navbar: React.FC<NavbarProps> = ({ onMegaMenuOpen }) => {
               </Badge>
             </IconButton>
             <IconButton color="inherit">
-              <SettingsIcon />
+              {/* <SettingsIcon /> */}
+              <ModeToggle />
             </IconButton>
           </Hidden>
 
@@ -131,8 +130,8 @@ const Navbar: React.FC<NavbarProps> = ({ onMegaMenuOpen }) => {
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
           >
-            <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
+            <MenuItem onClick={handleMenuClose}><i className="fas fa-user pr-2"></i>Perfil</MenuItem>
+            <MenuItem onClick={handleMenuClose}><i className="fas fa-right-from-bracket pr-2"></i>Cerrar Sesión</MenuItem>
           </Menu>
         </Box>
       </Toolbar>
