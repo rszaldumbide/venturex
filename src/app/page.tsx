@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
+import NavbarHome from "@/components/NavbarHome";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
@@ -98,7 +98,7 @@ function HomePage() {
     <div className="m-1">
       {/* nav bar */}
       <div>
-        <Navbar />
+        <NavbarHome />
       </div>
 
       {/* carousel */}
