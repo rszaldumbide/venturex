@@ -86,6 +86,9 @@ const Frutas = ({ pais }: Props) => {
         })),
       },
     ],
+    credits: {
+      text: "VentureX",
+    },
   };
 
   return (
@@ -117,8 +120,8 @@ const Frutas = ({ pais }: Props) => {
             </TableBody>
           </Table>
           <ReactPaginate
-            previousLabel={"← Previous"}
-            nextLabel={"Next →"}
+            previousLabel={"←"}
+            nextLabel={"→"}
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName="flex justify-center mt-4 space-x-2"

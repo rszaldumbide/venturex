@@ -86,11 +86,14 @@ export default function Industria({ pais }: Props) {
         })),
       },
     ],
+    credits: {
+      text: "VentureX",
+    },
   };
 
   return (
     <>
-      <div className="lg:grid lg:grid-cols-7 gap-2">
+      <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
           <Table className="mb-5">
             <TableHeader>

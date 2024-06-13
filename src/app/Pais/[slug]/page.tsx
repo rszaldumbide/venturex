@@ -32,7 +32,7 @@ function Pais() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Navbar onMegaMenuOpen={handleMegaMenuOpen} />
-        <div className="my-5 text-center text-2xl font-bold">
+        <div className="my-5 text-center text-2xl font-bold text-cyan-800">
           Análisis de {slug}
         </div>
         <Tabs defaultValue={sector || "frutas"} className="m-4">

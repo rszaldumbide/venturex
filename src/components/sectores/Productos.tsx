@@ -86,11 +86,14 @@ export default function Productos({ pais }: Props) {
         })),
       },
     ],
+    credits: {
+      text: "VentureX",
+    },
   };
 
   return (
     <>
-      <div className="lg:grid lg:grid-cols-7 gap-2">
+      <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
           <Table className="mb-5">
             <TableHeader>
@@ -117,8 +120,8 @@ export default function Productos({ pais }: Props) {
             </TableBody>
           </Table>
           <ReactPaginate
-            previousLabel={"← Previous"}
-            nextLabel={"Next →"}
+            previousLabel={"←"}
+            nextLabel={"→"}
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName="flex justify-center mt-4 space-x-2"
