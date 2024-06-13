@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Image from "next/image";
 
-
-
 const handleClick = (link: string) => {
   window.open(link, "_blank");
 };
@@ -32,7 +30,7 @@ const cards = [
   },
 ];
 
-export default function Dashboard({ administrador = "admin" }) {
+export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Menú inicialmente cerrado
 
   const toggleMenu = () => {
@@ -98,7 +96,7 @@ export default function Dashboard({ administrador = "admin" }) {
         </div>
         <h3 className="flex justify-center space-x-4">
           {" "}
-          ¡Bienvenido de vuelta, {administrador}!
+          ¡Bienvenido de vuelta, Administrador!
         </h3>
       </header>
 
