@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ModeToggle } from "@/components/ModeToggle";
 import Image from "next/image";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
+import { Button } from "@mui/material";
 
 function NavbarHome() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,22 +33,10 @@ function NavbarHome() {
             <Link href="/contact">Contact</Link>
           </div>
 
-          {/* Social Icons */}
-          <div className="hidden md:flex space-x-2">
-            <a href="#" className="text-gray-500 hover:text-gray-700">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">
-              <i className="fab fa-instagram"></i>
-            </a>
-          </div>
+         
 
           {/* Language and Login */}
           <div className="flex items-center space-x-2">
-            <span className="text-gray-700">ESP</span>
             <Link href="/login">
               <button className="bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition duration-200">
                 Login
@@ -56,12 +45,12 @@ function NavbarHome() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <Button
             className="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
           >
             <i className="fas fa-bars fa-lg"></i>
-          </button>
+          </Button>
         </div>
       </div>
 
