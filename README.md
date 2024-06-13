@@ -20,3 +20,4 @@ Los pasos a continuación para configurar y ejecutar el proyecto en tu máquina 
 4. Corre el siguiente comando para ejecutarlo: npm run dev
 
 
+npm install highcharts highcharts-react-official

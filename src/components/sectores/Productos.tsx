@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -9,6 +8,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { supabase } from "@/utils/supabase/Supabase";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 type Props = {
   pais: string;
@@ -23,8 +24,12 @@ type DataProductos = {
   2022: number;
   2023: number;
 };
+
 export default function Productos({ pais }: Props) {
   const [data, setData] = useState<DataProductos[]>([]);
+  const [topImportadores, setTopImportadores] = useState<
+    { name: string; value: number }[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,15 +44,41 @@ export default function Productos({ pais }: Props) {
       } else {
         setData(productos);
         console.log(productos);
+
+        // Calcular los top importadores
+        const topImportadoresData = productos
+          .map((item) => ({ name: item.importadores, value: item[2023] }))
+          .sort((a, b) => b.value - a.value)
+          .slice(0, 10); // Obtener los primeros 10 importadores
+
+        setTopImportadores(topImportadoresData);
       }
     };
 
     fetchData();
   }, [pais]);
 
+  const pieChartOptions: Highcharts.Options = {
+    chart: {
+      type: "pie",
+    },
+    title: {
+      text: "Top 10 Importadores de Productos",
+    },
+    series: [
+      {
+        name: "Valor Exportado",
+        data: topImportadores.map((importador) => ({
+          name: importador.name,
+          y: importador.value,
+        })),
+      },
+    ],
+  };
+
   return (
     <>
-      <div className="gap-2 lg:grid lg:grid-cols-7">
+      <div className="lg:grid lg:grid-cols-7 gap-2">
         <div className="col-span-5">
           <Table className="mb-5">
             <TableHeader>
@@ -75,10 +106,8 @@ export default function Productos({ pais }: Props) {
           </Table>
         </div>
         <div className="col-span-2">
-          {/* aqui metan los pasteles porfa */}
-          <h1 className="mx-auto flex justify-center text-center text-2xl font-bold">
-            PASTELITOS UwU
-          </h1>
+          {/* Grafico de Pastel */}
+          <HighchartsReact highcharts={Highcharts} options={pieChartOptions} />
         </div>
       </div>
     </>
