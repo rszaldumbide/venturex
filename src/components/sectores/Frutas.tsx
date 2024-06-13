@@ -98,7 +98,7 @@ const Frutas = ({ pais }: Props) => {
     <>
       <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
-          <Table className="mb-5 rounded-sm bg-sky-50">
+          <Table className="mb-5 rounded-sm bg-sky-50 dark:bg-gray-700 text-foreground ">
             <TableHeader>
               <TableRow>
                 <TableHead>Importadores</TableHead>
