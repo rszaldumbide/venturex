@@ -27,8 +27,9 @@ type DataProductos = {
   2023: number;
 };
 
-export default function Productos({ pais }: Props) {
+export default function Flor({ pais }: Props) {
   const [data, setData] = useState<DataProductos[]>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
@@ -38,8 +39,8 @@ export default function Productos({ pais }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: productos, error } = await supabase
-        .from("productos")
+      const { data: flor, error } = await supabase
+        .from("flor")
         .select("*")
         .eq("pais", pais)
         .order("id", { ascending: true });
@@ -47,12 +48,12 @@ export default function Productos({ pais }: Props) {
       if (error) {
         console.error(error);
       } else {
-        setData(productos);
+        setData(flor);
         setLoading(false);
-        console.log(productos);
+        console.log(flor);
 
         // Calcular los top importadores
-        const topImportadoresData = productos
+        const topImportadoresData = flor
           .map((item) => ({ name: item.importadores, value: item[2023] }))
           .sort((a, b) => b.value - a.value)
           .slice(0, 10); // Obtener los primeros 10 importadores

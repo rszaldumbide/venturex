@@ -10,6 +10,7 @@ import Frutas from "@/components/sectores/Frutas";
 import Metalurgico from "@/components/sectores/Metalurgico";
 import Industria from "@/components/sectores/Industria";
 import Productos from "@/components/sectores/Productos";
+import Flor from "@/components/sectores/Flor";
 
 function Pais() {
   const searchParams = useSearchParams();
@@ -36,8 +37,9 @@ function Pais() {
           Análisis de {slug}
         </div>
         <Tabs defaultValue={sector || "frutas"} className="m-4">
-          <TabsList className="grid h-auto w-auto grid-cols-1 grid-rows-4 lg:flex lg:max-w-[610px] lg:grid-cols-none lg:grid-rows-none lg:justify-center">
+          <TabsList className="grid h-auto w-auto grid-cols-1 grid-rows-5 lg:flex lg:max-w-[670px] lg:grid-cols-none lg:grid-rows-none lg:justify-center">
             <TabsTrigger value="frutas">Frutas Frescas</TabsTrigger>
+            <TabsTrigger value="flor">Florícolas</TabsTrigger>
             <TabsTrigger value="industria">Industrias 4.0</TabsTrigger>
             <TabsTrigger value="productos">
               Productos Agroalimentarios
@@ -48,6 +50,9 @@ function Pais() {
             <>
               <TabsContent value="frutas">
                 <Frutas pais={slug} />
+              </TabsContent>
+              <TabsContent value="flor">
+                <Flor pais={slug} />
               </TabsContent>
               <TabsContent value="industria">
                 <Industria pais={slug} />

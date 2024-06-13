@@ -5,12 +5,12 @@ import Image from "next/image";
 
 type props = {
   administrador: string;
-  email: string;
-  numero: number;
 };
+
 const handleClick = (link: string) => {
   window.open(link, "_blank");
 };
+
 const cards = [
   {
     title: "Investigación del Mercado",
@@ -34,11 +34,7 @@ const cards = [
   },
 ];
 
-export default function Dashboard({
-  administrador = "admin",
-  email,
-  numero,
-}: props) {
+export default function Dashboard({ administrador = "admin" }: props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Menú inicialmente cerrado
 
   const toggleMenu = () => {
@@ -91,16 +87,16 @@ export default function Dashboard({
         </div>
       </aside>
       <header className="mb-8">
-        <div className="flex tex-center align-center justify-center ">  
-        <Image
-          src="/imgs/venturex.png"
-          alt="VentureX"
-          width={40}
-          height={40}
-        ></Image>
-        <h1 className="mb-4 text-center text-4xl font-bold">
-          Dashboard VentureX
-        </h1>
+        <div className="tex-center align-center flex justify-center">
+          <Image
+            src="/imgs/venturex.png"
+            alt="VentureX"
+            width={40}
+            height={40}
+          />
+          <h1 className="mb-4 text-center text-4xl font-bold">
+            Dashboard VentureX
+          </h1>
         </div>
         <h3 className="flex justify-center space-x-4">
           {" "}
