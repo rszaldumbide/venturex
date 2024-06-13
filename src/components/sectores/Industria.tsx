@@ -95,7 +95,7 @@ export default function Industria({ pais }: Props) {
     <>
       <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
-          <Table className="mb-5">
+          <Table className="mb-5 bg-sky-50 rounded-sm">
             <TableHeader>
               <TableRow>
                 <TableHead>Importadores</TableHead>

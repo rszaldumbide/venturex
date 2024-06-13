@@ -32,11 +32,11 @@ function Pais() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Navbar onMegaMenuOpen={handleMegaMenuOpen} />
-        <div className="my-5 text-center text-2xl font-bold text-cyan-800">
+        <div className="my-8 text-center text-2xl font-bold text-cyan-800">
           Análisis de {slug}
         </div>
         <Tabs defaultValue={sector || "frutas"} className="m-4">
-          <TabsList className="grid h-auto w-auto grid-cols-1 grid-rows-4 lg:flex lg:max-w-[610px] lg:grid-cols-none lg:grid-rows-none lg:justify-start">
+          <TabsList className="grid h-auto w-auto grid-cols-1 grid-rows-4 lg:flex lg:max-w-[610px] lg:grid-cols-none lg:grid-rows-none lg:justify-center">
             <TabsTrigger value="frutas">Frutas Frescas</TabsTrigger>
             <TabsTrigger value="industria">Industrias 4.0</TabsTrigger>
             <TabsTrigger value="productos">
