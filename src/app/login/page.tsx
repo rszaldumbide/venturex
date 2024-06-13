@@ -57,7 +57,7 @@ export default function Login() {
       </div>
       <div className="hidden bg-muted lg:block">
         <Image
-          src="/imgs/misionvision/vision.jpg"
+          src="/imgs/login.jpg"
           alt="Image"
           width="2920"
           height="2080"
