@@ -27,16 +27,16 @@ const ValoresComponent: React.FC<ValoresComponentProps> = ({ valores }) => {
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-800';
   const bgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-white';
   const cardBgColor = theme === 'dark' ? 'bg-gray-700' : 'bg-cyan-50';
-  const iconColor = theme === 'dark' ? 'text-cyan-300' : 'text-cyan-800';
+  const iconColor = theme === 'dark' ? 'text-cyan-800' : 'text-cyan-800';
 
   return (
     <div className="container mx-auto mt-10 max-w-6xl mb-4">
       <h2 className={`mb-6 text-center text-3xl font-semibold ${iconColor}`}>
         Nuestros Valores
       </h2>
-      <ul className="space-y-6">
+      <div className="space-y-6">
         {valores.map((valor, index) => (
-          <li
+          <Card
             key={index}
             className={`p-6 ${cardBgColor} rounded-lg shadow-md flex items-center space-x-6 transition-transform ${
               hoveredIndex === index && "transform scale-105"
@@ -44,18 +44,18 @@ const ValoresComponent: React.FC<ValoresComponentProps> = ({ valores }) => {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <div className={`text-4xl ${iconColor}`}>{iconMap[valor.icon]}</div>
+            <div className={`text-4xl dark:text-cyan-300 text-cyan-800`}>{iconMap[valor.icon]}</div>
             <div>
-              <h3 className={`text-2xl font-semibold ${iconColor}`}>
+              <h3 className={`text-2xl font-semibold dark:text-cyan-300 text-cyan-800`}>
                 {valor.title}
               </h3>
               <p id={`valor-${index}`} className={`mt-2 ${textColor}`}>
                 {valor.description}
               </p>
             </div>
-          </li>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
