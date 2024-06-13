@@ -10,14 +10,13 @@ import {
 import { supabase } from "@/utils/supabase/Supabase";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-
 import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   pais: string;
 };
 
-type DataIndustria = {
+type DataFrutas = {
   importadores: string;
   pais: string;
   2019: number;
@@ -27,9 +26,8 @@ type DataIndustria = {
   2023: number;
 };
 
-export default function Industria({ pais }: Props) {
-  const [data, setData] = useState<DataIndustria[]>([]);
-
+const Flor = ({ pais }: Props) => {
+  const [data, setData] = useState<DataFrutas[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
@@ -37,8 +35,8 @@ export default function Industria({ pais }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: industria, error } = await supabase
-        .from("industria")
+      const { data: flor, error } = await supabase
+        .from("flor")
         .select("*")
         .eq("pais", pais)
         .order("id", { ascending: true });
@@ -46,12 +44,12 @@ export default function Industria({ pais }: Props) {
       if (error) {
         console.error(error);
       } else {
-        setData(industria);
+        setData(flor);
         setLoading(false);
-        console.log(industria);
+        console.log(flor);
 
         // Calcular los top importadores
-        const topImportadoresData = industria
+        const topImportadoresData = flor
           .map((item) => ({ name: item.importadores, value: item[2023] }))
           .sort((a, b) => b.value - a.value)
           .slice(0, 10); // Obtener los primeros 10 importadores
@@ -73,10 +71,10 @@ export default function Industria({ pais }: Props) {
     series: [
       {
         type: "pie", // Add the type property with the value "pie"
-        name: "Valor Exportado",
-        data: topImportadores.map((importador) => ({
-          name: importador.name,
-          y: importador.value,
+        name: "Valor exportado en 2023",
+        data: topImportadores.map((item) => ({
+          name: item.name,
+          y: item.value,
         })),
       },
     ],
@@ -140,4 +138,6 @@ export default function Industria({ pais }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default Flor;

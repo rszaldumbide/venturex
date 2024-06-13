@@ -10,6 +10,7 @@ import {
 import { supabase } from "@/utils/supabase/Supabase";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   pais: string;
@@ -27,6 +28,7 @@ type DataMetalurgico = {
 
 export default function Metalurgico({ pais }: Props) {
   const [data, setData] = useState<DataMetalurgico[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
   >([]);
@@ -43,6 +45,7 @@ export default function Metalurgico({ pais }: Props) {
         console.error(error);
       } else {
         setData(metalurgico);
+        setLoading(false);
         console.log(metalurgico);
 
         // Calcular los top importadores
@@ -93,16 +96,38 @@ export default function Metalurgico({ pais }: Props) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item) => (
-                <TableRow key={item.importadores}>
-                  <TableCell>{item.importadores}</TableCell>
-                  <TableCell className="text-center">{item[2019]}</TableCell>
-                  <TableCell className="text-center">{item[2020]}</TableCell>
-                  <TableCell className="text-center">{item[2021]}</TableCell>
-                  <TableCell className="text-center">{item[2022]}</TableCell>
-                  <TableCell className="text-center">{item[2023]}</TableCell>
-                </TableRow>
-              ))}
+              {loading ? (
+                <>
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center">
+                    <Skeleton className="h-[545px]" />
+                    </TableCell>
+                  </TableRow>
+                </>
+              ) : (
+                <>
+                  {data.map((item) => (
+                    <TableRow key={item.importadores}>
+                      <TableCell>{item.importadores}</TableCell>
+                      <TableCell className="text-center">
+                        {item[2019]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2020]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2021]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2022]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2023]}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              )}
             </TableBody>
           </Table>
         </div>

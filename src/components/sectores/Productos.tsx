@@ -10,6 +10,7 @@ import {
 import { supabase } from "@/utils/supabase/Supabase";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   pais: string;
@@ -27,6 +28,7 @@ type DataProductos = {
 
 export default function Productos({ pais }: Props) {
   const [data, setData] = useState<DataProductos[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
   >([]);
@@ -43,6 +45,7 @@ export default function Productos({ pais }: Props) {
         console.error(error);
       } else {
         setData(productos);
+        setLoading(false);
         console.log(productos);
 
         // Calcular los top importadores
@@ -79,7 +82,7 @@ export default function Productos({ pais }: Props) {
 
   return (
     <>
-      <div className="lg:grid lg:grid-cols-7 gap-2">
+      <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
           <Table className="mb-5">
             <TableHeader>
@@ -93,16 +96,38 @@ export default function Productos({ pais }: Props) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item) => (
-                <TableRow key={item.importadores}>
-                  <TableCell>{item.importadores}</TableCell>
-                  <TableCell className="text-center">{item[2019]}</TableCell>
-                  <TableCell className="text-center">{item[2020]}</TableCell>
-                  <TableCell className="text-center">{item[2021]}</TableCell>
-                  <TableCell className="text-center">{item[2022]}</TableCell>
-                  <TableCell className="text-center">{item[2023]}</TableCell>
-                </TableRow>
-              ))}
+              {loading ? (
+                <>
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center">
+                    <Skeleton className="h-[545px]" />
+                    </TableCell>
+                  </TableRow>
+                </>
+              ) : (
+                <>
+                  {data.map((item) => (
+                    <TableRow key={item.importadores}>
+                      <TableCell>{item.importadores}</TableCell>
+                      <TableCell className="text-center">
+                        {item[2019]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2020]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2021]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2022]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2023]}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              )}
             </TableBody>
           </Table>
         </div>

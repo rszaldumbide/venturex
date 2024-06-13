@@ -154,6 +154,9 @@ const Dashboard: React.FC = () => {
                                   <SelectItem value="frutas">
                                     Frutas Frescas
                                   </SelectItem>
+                                  <SelectItem value="flor">
+                                    Sector Florícola
+                                  </SelectItem>
                                   <SelectItem value="industria">
                                     Industrias 4.0
                                   </SelectItem>
