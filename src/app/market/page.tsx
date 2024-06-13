@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
       sector: form.getValues("sector"),
     });
   }, [selectedCountry, form]);
-  
+
   function onSubmit(values: paisValues) {
     console.log(values);
     router.push(`/Pais/${values.pais}?sector=${values.sector}`);
@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
 
       <Grid container spacing={2} className="p-8">
         <Grid item xs={12} md={8}>
-          <div className="flex flex-col overflow-hidden rounded border border-gray-300">
+          <div className="flex flex-col overflow-hidden rounded border-2 border-gray-300">
             <div className="w-full flex-1">
               {" "}
               {/* Contenedor flexible para el mapa */}
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
         <Grid item xs={12} md={4}>
           {selectedCountry ? (
             <>
-              <h1 className="mb-4 pb-2 text-center text-3xl font-bold">
+              <h1 className="mb-4 pb-2 text-center text-3xl font-bold text-cyan-800">
                 Consultar {selectedCountry.name}
               </h1>
               <div>
@@ -170,7 +170,7 @@ const Dashboard: React.FC = () => {
                           )}
                         />
                         <div className="text-center">
-                          <Button type="submit" className="gap-2">
+                          <Button type="submit" className="gap-2 bg-cyan-800">
                             <FaSearch />
                             Consultar
                           </Button>
