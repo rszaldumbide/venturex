@@ -126,7 +126,7 @@ function HomePage() {
                   />
                   {/* Contenedor del texto */}
                   <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-right">
-                    <h2 className="text-4xl font-bold text-white mb-4 text-right">{image.text}</h2>
+                    <h2 className="text-4xl font-bold text-white mb-4 text-right z-20">{image.text}</h2>
                   </div>
                 </div>
               </CarouselItem>

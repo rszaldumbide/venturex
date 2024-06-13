@@ -26,7 +26,7 @@ const ValoresComponent: React.FC<ValoresComponentProps> = ({ valores }) => {
 
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-800';
   const bgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-white';
-  const cardBgColor = theme === 'dark' ? 'bg-gray-700' : 'bg-cyan-50';
+  const cardBgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-cyan-900';
   const iconColor = theme === 'dark' ? 'text-cyan-800' : 'text-cyan-800';
 
   return (
