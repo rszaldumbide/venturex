@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
@@ -25,6 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { paisSchema, paisValues } from "@/schemas/paisSchema";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const DynamicMapChart = dynamic(() => import("@/components/MapChart"), {
   ssr: false,
@@ -55,11 +56,18 @@ const Dashboard: React.FC = () => {
   const form = useForm<paisValues>({
     resolver: zodResolver(paisSchema),
     defaultValues: {
-      pais: "Chile",
+      pais: selectedCountry?.name || "",
       sector: "",
     },
   });
 
+  useEffect(() => {
+    form.reset({
+      pais: selectedCountry?.name || "",
+      sector: form.getValues("sector"),
+    });
+  }, [selectedCountry, form]);
+  
   function onSubmit(values: paisValues) {
     console.log(values);
     router.push(`/Pais/${values.pais}?sector=${values.sector}`);
@@ -89,7 +97,8 @@ const Dashboard: React.FC = () => {
                 Consultar {selectedCountry.name}
               </h1>
               <div>
-                {selectedCountry.name !== "Chile" ? (
+                {selectedCountry.name !== "Chile" &&
+                selectedCountry.name !== "Ecuador" ? (
                   <Grid item xs={12}>
                     <Warning />
                     <p className="text-center">
@@ -102,8 +111,26 @@ const Dashboard: React.FC = () => {
                     <Form {...form}>
                       <form
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className="flex items-end justify-center gap-4"
+                        className="space-y-4"
                       >
+                        <FormField
+                          control={form.control}
+                          name="pais"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>País Seleccionado</FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...field}
+                                  value={selectedCountry?.name}
+                                  defaultValue={selectedCountry?.name}
+                                  readOnly
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
                         <FormField
                           control={form.control}
                           name="sector"
@@ -138,11 +165,12 @@ const Dashboard: React.FC = () => {
                             </FormItem>
                           )}
                         />
-
-                        <Button type="submit" className="gap-2">
-                          <FaSearch />
-                          Consultar
-                        </Button>
+                        <div className="text-center">
+                          <Button type="submit" className="gap-2">
+                            <FaSearch />
+                            Consultar
+                          </Button>
+                        </div>
                       </form>
                     </Form>
                   </div>
