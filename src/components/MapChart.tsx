@@ -7,6 +7,10 @@ import {
 } from "react-simple-maps";
 import worldMapData from "../../public/json/world-110m.json";
 
+// Define el tipo Country
+interface Country {
+  name: string;
+}
 interface MapChartProps {
   onCountrySelect: (country: Country) => void;
   selectedCountry?: Country | null;
