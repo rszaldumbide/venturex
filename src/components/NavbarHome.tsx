@@ -38,6 +38,11 @@ function NavbarHome() {
           <Link href="/contact">
             <Button className="text-gray-800 hover:text-blue-900">Contact</Button>
           </Link>
+          <Link href="/login">
+            <Button className="block bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded transition duration-200">
+              Login
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
