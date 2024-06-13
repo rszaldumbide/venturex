@@ -2,7 +2,12 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 //componentes
+import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardDescription } from "@/components/ui/card";
 
 export default function Login() {
   const router = useRouter();
@@ -16,37 +21,48 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded bg-white p-8 shadow-md">
-        <h2 className="mb-6 text-center text-2xl font-bold">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="mb-2 block text-gray-700">Email</label>
-            <input
-              type="email"
-              className="w-full rounded border p-3"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+    <div className="max-h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <div className="flex items-center justify-center py-12">
+        <div className="py-auto mx-auto grid w-[350px] items-center gap-6">
+          <div className="grid gap-2">
+            <h1 className="text-center text-3xl font-bold">Iniciar Sesión</h1>
+            {/* <p className="text-balance text-muted-foreground">
+              Enter your email below to login to your account
+            </p> */}
+            <CardDescription>
+              Ingresa tu correo electrónico para acceder a tu cuenta.
+            </CardDescription>
           </div>
-          <div className="mb-6">
-            <label className="mb-2 block text-gray-700">Password</label>
-            <input
-              type="password"
-              className="w-full rounded border p-3"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <Button
-            type="submit"
-            className="w-full rounded bg-blue-600 p-3 font-semibold text-white"
-          >
-            Login
-          </Button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="m@example.com" />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input id="password" type="password" />
+              </div>
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
+              {/* <Button variant="outline" className="w-full">
+              Login with Google
+            </Button> */}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="hidden bg-muted lg:block">
+        <Image
+          src="/imgs/misionvision/vision.jpg"
+          alt="Image"
+          width="2920"
+          height="2080"
+          className="max-h-screen w-full overflow-hidden object-cover dark:brightness-[0.2] dark:grayscale"
+        />
       </div>
     </div>
   );
