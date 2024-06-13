@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import {
   Table,
   TableBody,
@@ -32,6 +33,8 @@ export default function Productos({ pais }: Props) {
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
   >([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +64,14 @@ export default function Productos({ pais }: Props) {
     fetchData();
   }, [pais]);
 
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
+  };
+
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = data.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(data.length / itemsPerPage);
+
   const pieChartOptions: Highcharts.Options = {
     chart: {
       type: "pie",
@@ -70,7 +81,7 @@ export default function Productos({ pais }: Props) {
     },
     series: [
       {
-        type: "pie", // Add the type property here
+        type: "pie",
         name: "Valor Exportado",
         data: topImportadores.map((importador) => ({
           name: importador.name,
@@ -78,13 +89,16 @@ export default function Productos({ pais }: Props) {
         })),
       },
     ],
+    credits: {
+      text: "VentureX",
+    },
   };
 
   return (
     <>
       <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
-          <Table className="mb-5">
+          <Table className="mb-5 bg-sky-50 rounded-sm">
             <TableHeader>
               <TableRow>
                 <TableHead>Importadores</TableHead>
@@ -96,40 +110,35 @@ export default function Productos({ pais }: Props) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {loading ? (
-                <>
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center">
-                    <Skeleton className="h-[545px]" />
-                    </TableCell>
-                  </TableRow>
-                </>
-              ) : (
-                <>
-                  {data.map((item) => (
-                    <TableRow key={item.importadores}>
-                      <TableCell>{item.importadores}</TableCell>
-                      <TableCell className="text-center">
-                        {item[2019]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2020]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2021]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2022]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2023]}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </>
-              )}
+              {data.map((item) => (
+                <TableRow key={item.importadores}>
+                  <TableCell>{item.importadores}</TableCell>
+                  <TableCell className="text-center">{item[2019]}</TableCell>
+                  <TableCell className="text-center">{item[2020]}</TableCell>
+                  <TableCell className="text-center">{item[2021]}</TableCell>
+                  <TableCell className="text-center">{item[2022]}</TableCell>
+                  <TableCell className="text-center">{item[2023]}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
+          <ReactPaginate
+            previousLabel={"←"}
+            nextLabel={"→"}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName="flex justify-center mt-4 space-x-2"
+            pageClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
+            pageLinkClassName="flex items-center justify-center w-full h-full"
+            previousClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
+            previousLinkClassName="flex items-center justify-center w-full h-full"
+            nextClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
+            nextLinkClassName="flex items-center justify-center w-full h-full"
+            breakClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
+            breakLinkClassName="flex items-center justify-center w-full h-full"
+            activeClassName="bg-blue-500 text-white"
+            disabledClassName="opacity-50 cursor-not-allowed"
+          />
         </div>
         <div className="col-span-2">
           {/* Grafico de Pastel */}
