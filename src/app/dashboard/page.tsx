@@ -56,7 +56,7 @@ export default function Dashboard({
       </button>
 
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 transform bg-green-600 bg-opacity-60 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed left-0 top-0 h-screen w-64 transform bg-cyan-600 bg-opacity-90 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <button
           onClick={toggleMenu}
@@ -121,9 +121,6 @@ export default function Dashboard({
           </a>
         ))}
       </main>
-
-      <br />
-      {/* gif fondo */}
 
       <footer className="mt-8 text-center">
         <p>© 2024 VentureX. Todos los derechos reservados.</p>
