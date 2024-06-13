@@ -120,7 +120,7 @@ export default function Industria({ pais }: Props) {
                 </>
               ) : (
                 <>
-                  {data.map((item) => (
+                  {currentPageData.map((item) => (
                     <TableRow key={item.importadores}>
                       <TableCell>{item.importadores}</TableCell>
                       <TableCell className="text-center">

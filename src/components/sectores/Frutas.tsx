@@ -114,13 +114,13 @@ const Frutas = ({ pais }: Props) => {
                 <>
                   <TableRow>
                     <TableCell colSpan={6} className="text-center">
-                    <Skeleton className="h-[545px]" />
+                      <Skeleton className="h-[545px]" />
                     </TableCell>
                   </TableRow>
                 </>
               ) : (
                 <>
-                  {data.map((item) => (
+                  {currentPageData.map((item) => (
                     <TableRow key={item.importadores}>
                       <TableCell>{item.importadores}</TableCell>
                       <TableCell className="text-center">

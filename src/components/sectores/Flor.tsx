@@ -29,11 +29,8 @@ type DataProductos = {
 
 export default function Flor({ pais }: Props) {
   const [data, setData] = useState<DataProductos[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
-  const [topImportadores, setTopImportadores] = useState<
-    { name: string; value: number }[]
-  >([]);
+  const [topImportadores, setTopImportadores] = useState<{ name: string; value: number }[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
@@ -65,8 +62,8 @@ export default function Flor({ pais }: Props) {
     fetchData();
   }, [pais]);
 
-  const handlePageClick = (selectedItem: { selected: number }) => {
-    setCurrentPage(selectedItem.selected);
+  const handlePageClick = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected >= 0 ? Math.min(selected, pageCount - 1) : 0);
   };
 
   const offset = currentPage * itemsPerPage;
@@ -112,36 +109,22 @@ export default function Flor({ pais }: Props) {
             </TableHeader>
             <TableBody>
               {loading ? (
-                <>
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center">
-                      <Skeleton className="h-[545px]" />
-                    </TableCell>
-                  </TableRow>
-                </>
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center">
+                    <Skeleton className="h-[545px]" />
+                  </TableCell>
+                </TableRow>
               ) : (
-                <>
-                  {data.map((item) => (
-                    <TableRow key={item.importadores}>
-                      <TableCell>{item.importadores}</TableCell>
-                      <TableCell className="text-center">
-                        {item[2019]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2020]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2021]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2022]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2023]}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </>
+                currentPageData.map((item) => (
+                  <TableRow key={item.importadores}>
+                    <TableCell>{item.importadores}</TableCell>
+                    <TableCell className="text-center">{item[2019]}</TableCell>
+                    <TableCell className="text-center">{item[2020]}</TableCell>
+                    <TableCell className="text-center">{item[2021]}</TableCell>
+                    <TableCell className="text-center">{item[2022]}</TableCell>
+                    <TableCell className="text-center">{item[2023]}</TableCell>
+                  </TableRow>
+                ))
               )}
             </TableBody>
           </Table>

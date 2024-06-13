@@ -68,8 +68,21 @@ export default function Productos({ pais }: Props) {
     setCurrentPage(selectedItem.selected);
   };
 
-  const offset = currentPage * itemsPerPage;
-  const currentPageData = data.slice(offset, offset + itemsPerPage);
+  const renderTableRows = () => {
+    const offset = currentPage * itemsPerPage;
+    const currentPageData = data.slice(offset, offset + itemsPerPage);
+    return currentPageData.map((item) => (
+      <TableRow key={item.importadores}>
+        <TableCell>{item.importadores}</TableCell>
+        <TableCell className="text-center">{item[2019]}</TableCell>
+        <TableCell className="text-center">{item[2020]}</TableCell>
+        <TableCell className="text-center">{item[2021]}</TableCell>
+        <TableCell className="text-center">{item[2022]}</TableCell>
+        <TableCell className="text-center">{item[2023]}</TableCell>
+      </TableRow>
+    ));
+  };
+
   const pageCount = Math.ceil(data.length / itemsPerPage);
 
   const pieChartOptions: Highcharts.Options = {
@@ -111,35 +124,10 @@ export default function Productos({ pais }: Props) {
             </TableHeader>
             <TableBody>
               {loading ? (
-                <>
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center">
-                      <Skeleton className="h-[545px]" />
-                    </TableCell>
-                  </TableRow>
-                </>
+                <SkeletonRow />
               ) : (
                 <>
-                  {data.map((item) => (
-                    <TableRow key={item.importadores}>
-                      <TableCell>{item.importadores}</TableCell>
-                      <TableCell className="text-center">
-                        {item[2019]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2020]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2021]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2022]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2023]}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {renderTableRows()}
                 </>
               )}
             </TableBody>
@@ -170,3 +158,11 @@ export default function Productos({ pais }: Props) {
     </>
   );
 }
+
+const SkeletonRow = () => (
+  <TableRow>
+    <TableCell colSpan={6} className="text-center">
+      <Skeleton className="h-[545px]" />
+    </TableCell>
+  </TableRow>
+);

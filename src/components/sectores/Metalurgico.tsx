@@ -30,26 +30,25 @@ type DataMetalurgico = {
 export default function Metalurgico({ pais }: Props) {
   const [data, setData] = useState<DataMetalurgico[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [topImportadores, setTopImportadores] = useState<
-    { name: string; value: number }[]
-  >([]);
+  const [topImportadores, setTopImportadores] = useState<{ name: string; value: number }[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: metalurgico, error } = await supabase
-        .from("metalurgico")
-        .select("*")
-        .eq("pais", pais)
-        .order("id", { ascending: true });
+      try {
+        const { data: metalurgico, error } = await supabase
+          .from("metalurgico")
+          .select("*")
+          .eq("pais", pais)
+          .order("id", { ascending: true });
 
-      if (error) {
-        console.error(error);
-      } else {
+        if (error) {
+          throw new Error(error.message);
+        }
+
         setData(metalurgico);
         setLoading(false);
-        console.log(metalurgico);
 
         // Calcular los top importadores
         const topImportadoresData = metalurgico
@@ -58,18 +57,34 @@ export default function Metalurgico({ pais }: Props) {
           .slice(0, 10); // Obtener los primeros 10 importadores
 
         setTopImportadores(topImportadoresData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false); // Opcional: Cambiar el estado de carga en caso de error
       }
     };
 
     fetchData();
   }, [pais]);
 
-  const handlePageClick = (selectedItem: { selected: number }) => {
-    setCurrentPage(selectedItem.selected);
+  const handlePageClick = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
   };
 
-  const offset = currentPage * itemsPerPage;
-  const currentPageData = data.slice(offset, offset + itemsPerPage);
+  const renderTableRows = () => {
+    const offset = currentPage * itemsPerPage;
+    const currentPageData = data.slice(offset, offset + itemsPerPage);
+    return currentPageData.map((item) => (
+      <TableRow key={item.importadores}>
+        <TableCell>{item.importadores}</TableCell>
+        <TableCell className="text-center">{item[2019]}</TableCell>
+        <TableCell className="text-center">{item[2020]}</TableCell>
+        <TableCell className="text-center">{item[2021]}</TableCell>
+        <TableCell className="text-center">{item[2022]}</TableCell>
+        <TableCell className="text-center">{item[2023]}</TableCell>
+      </TableRow>
+    ));
+  };
+
   const pageCount = Math.ceil(data.length / itemsPerPage);
 
   const pieChartOptions: Highcharts.Options = {
@@ -109,40 +124,7 @@ export default function Metalurgico({ pais }: Props) {
                 <TableHead>Valor exportado en 2023</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {loading ? (
-                <>
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center">
-                      <Skeleton className="h-[545px]" />
-                    </TableCell>
-                  </TableRow>
-                </>
-              ) : (
-                <>
-                  {data.map((item) => (
-                    <TableRow key={item.importadores}>
-                      <TableCell>{item.importadores}</TableCell>
-                      <TableCell className="text-center">
-                        {item[2019]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2020]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2021]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2022]}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {item[2023]}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </>
-              )}
-            </TableBody>
+            <TableBody>{loading ? <SkeletonRow /> : renderTableRows()}</TableBody>
           </Table>
           <ReactPaginate
             previousLabel={"←"}
@@ -170,3 +152,11 @@ export default function Metalurgico({ pais }: Props) {
     </>
   );
 }
+
+const SkeletonRow = () => (
+  <TableRow>
+    <TableCell colSpan={6} className="text-center">
+      <Skeleton className="h-[545px]" />
+    </TableCell>
+  </TableRow>
+);
