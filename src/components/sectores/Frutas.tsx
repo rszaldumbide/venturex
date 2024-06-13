@@ -67,7 +67,8 @@ const Frutas = ({ pais }: Props) => {
     },
     series: [
       {
-        name: "Valor exportado",
+        type: "pie", // Add the type property with the value "pie"
+        name: "Valor exportado en 2023",
         data: topImportadores.map((item) => ({
           name: item.name,
           y: item.value,

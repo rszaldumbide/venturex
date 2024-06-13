@@ -67,6 +67,7 @@ export default function Metalurgico({ pais }: Props) {
     },
     series: [
       {
+        type: "pie", // Add the type property here
         name: "Valor Exportado",
         data: topImportadores.map((importador) => ({
           name: importador.name,

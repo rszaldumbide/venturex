@@ -67,6 +67,7 @@ export default function Industria({ pais }: Props) {
     },
     series: [
       {
+        type: "pie", // Add the type property with the value "pie"
         name: "Valor Exportado",
         data: topImportadores.map((importador) => ({
           name: importador.name,
