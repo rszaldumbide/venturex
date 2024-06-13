@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 import {
   Table,
   TableBody,
@@ -11,7 +10,6 @@ import {
 import { supabase } from "@/utils/supabase/Supabase";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-
 import { Skeleton } from "../ui/skeleton";
 
 type Props = {
@@ -28,20 +26,17 @@ type DataFrutas = {
   2023: number;
 };
 
-const Frutas = ({ pais }: Props) => {
+const Flor = ({ pais }: Props) => {
   const [data, setData] = useState<DataFrutas[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
   >([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: frutas, error } = await supabase
-        .from("frutas")
+      const { data: flor, error } = await supabase
+        .from("flor")
         .select("*")
         .eq("pais", pais)
         .order("id", { ascending: true });
@@ -49,12 +44,12 @@ const Frutas = ({ pais }: Props) => {
       if (error) {
         console.error(error);
       } else {
-        setData(frutas);
+        setData(flor);
         setLoading(false);
-        console.log(frutas);
+        console.log(flor);
 
         // Calcular los top importadores
-        const topImportadoresData = frutas
+        const topImportadoresData = flor
           .map((item) => ({ name: item.importadores, value: item[2023] }))
           .sort((a, b) => b.value - a.value)
           .slice(0, 10); // Obtener los primeros 10 importadores
@@ -66,20 +61,12 @@ const Frutas = ({ pais }: Props) => {
     fetchData();
   }, [pais]);
 
-  const handlePageClick = (selectedItem: { selected: number }) => {
-    setCurrentPage(selectedItem.selected);
-  };
-
-  const offset = currentPage * itemsPerPage;
-  const currentPageData = data.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(data.length / itemsPerPage);
-
   const pieChartOptions: Highcharts.Options = {
     chart: {
       type: "pie",
     },
     title: {
-      text: "Top 10 Importadores de Frutas",
+      text: "Top 10 Importadores",
     },
     series: [
       {
@@ -91,16 +78,13 @@ const Frutas = ({ pais }: Props) => {
         })),
       },
     ],
-    credits: {
-      text: "VentureX",
-    },
   };
 
   return (
     <>
       <div className="gap-2 lg:grid lg:grid-cols-7">
         <div className="col-span-5">
-          <Table className="mb-5 bg-sky-50 rounded-sm">
+          <Table className="mb-5">
             <TableHeader>
               <TableRow>
                 <TableHead>Importadores</TableHead>
@@ -112,35 +96,40 @@ const Frutas = ({ pais }: Props) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {currentPageData.map((item) => (
-                <TableRow key={item.importadores}>
-                  <TableCell>{item.importadores}</TableCell>
-                  <TableCell className="text-center">{item[2019]}</TableCell>
-                  <TableCell className="text-center">{item[2020]}</TableCell>
-                  <TableCell className="text-center">{item[2021]}</TableCell>
-                  <TableCell className="text-center">{item[2022]}</TableCell>
-                  <TableCell className="text-center">{item[2023]}</TableCell>
-                </TableRow>
-              ))}
+              {loading ? (
+                <>
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center">
+                    <Skeleton className="h-[545px]" />
+                    </TableCell>
+                  </TableRow>
+                </>
+              ) : (
+                <>
+                  {data.map((item) => (
+                    <TableRow key={item.importadores}>
+                      <TableCell>{item.importadores}</TableCell>
+                      <TableCell className="text-center">
+                        {item[2019]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2020]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2021]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2022]}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item[2023]}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              )}
             </TableBody>
           </Table>
-          <ReactPaginate
-            previousLabel={"←"}
-            nextLabel={"→"}
-            pageCount={pageCount}
-            onPageChange={handlePageClick}
-            containerClassName="flex justify-center mt-4 space-x-2"
-            pageClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
-            pageLinkClassName="flex items-center justify-center w-full h-full"
-            previousClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
-            previousLinkClassName="flex items-center justify-center w-full h-full"
-            nextClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
-            nextLinkClassName="flex items-center justify-center w-full h-full"
-            breakClassName="flex items-center justify-center w-10 h-10 border border-gray-300 rounded"
-            breakLinkClassName="flex items-center justify-center w-full h-full"
-            activeClassName="bg-blue-500 text-white"
-            disabledClassName="opacity-50 cursor-not-allowed"
-          />
         </div>
         <div className="col-span-2">
           {/* Grafico de Pastel */}
@@ -151,4 +140,4 @@ const Frutas = ({ pais }: Props) => {
   );
 };
 
-export default Frutas;
+export default Flor;

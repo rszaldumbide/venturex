@@ -12,6 +12,8 @@ import { supabase } from "@/utils/supabase/Supabase";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+import { Skeleton } from "../ui/skeleton";
+
 type Props = {
   pais: string;
 };
@@ -28,6 +30,8 @@ type DataIndustria = {
 
 export default function Industria({ pais }: Props) {
   const [data, setData] = useState<DataIndustria[]>([]);
+
+  const [loading, setLoading] = useState<boolean>(true);
   const [topImportadores, setTopImportadores] = useState<
     { name: string; value: number }[]
   >([]);
@@ -46,6 +50,7 @@ export default function Industria({ pais }: Props) {
         console.error(error);
       } else {
         setData(industria);
+        setLoading(false);
         console.log(industria);
 
         // Calcular los top importadores
@@ -107,7 +112,7 @@ export default function Industria({ pais }: Props) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {currentPageData.map((item) => (
+              {data.map((item) => (
                 <TableRow key={item.importadores}>
                   <TableCell>{item.importadores}</TableCell>
                   <TableCell className="text-center">{item[2019]}</TableCell>
