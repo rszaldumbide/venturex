@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Image from "next/image";
 
-type props = {
-  administrador: string;
-};
+
 
 const handleClick = (link: string) => {
   window.open(link, "_blank");
@@ -34,7 +32,7 @@ const cards = [
   },
 ];
 
-export default function Dashboard({ administrador = "admin" }: props) {
+export default function Dashboard({ administrador = "admin" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Menú inicialmente cerrado
 
   const toggleMenu = () => {
