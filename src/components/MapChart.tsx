@@ -34,16 +34,16 @@ const MapChart: React.FC<MapChartProps> = ({ onCountrySelect, selectedCountry })
                                 style={{
                                     default: {
                                         fill: selectedCountry && selectedCountry.name === geo.properties.name
-                                            ? "#F53" // Color de relleno para el país seleccionado
+                                            ? "#326daf" // Color de relleno para el país seleccionado
                                             : "#D6D6DA",
                                         outline: "none",
                                     },
                                     hover: {
-                                        fill: "#F53",
+                                        fill: "#326daf",
                                         outline: "none",
                                     },
                                     pressed: {
-                                        fill: "#E42",
+                                        fill: "#326daf",
                                         outline: "none",
                                     },
                                 }}

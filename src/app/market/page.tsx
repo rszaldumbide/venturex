@@ -69,6 +69,10 @@ const Dashboard: React.FC = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Navbar onMegaMenuOpen={handleMegaMenuOpen} />
 
+      <div className="m-3 mt-5 text-center text-2xl font-semibold text-cyan-700">
+        <h1>Investigación de Mercado</h1>
+      </div>
+
       <Grid container spacing={2} className="p-8">
         <Grid item xs={12} md={8}>
           <div className="flex flex-col overflow-hidden rounded border border-gray-300">
@@ -150,7 +154,7 @@ const Dashboard: React.FC = () => {
               </div>
             </>
           ) : (
-            <div className="gap-4 text-center">
+            <div className="flex flex-col items-center justify-center gap-4 text-center">
               <Warning />
               <p>Selecciona primero un País</p>
             </div>
