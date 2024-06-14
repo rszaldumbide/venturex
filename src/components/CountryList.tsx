@@ -1,6 +1,8 @@
 import React from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { LayoutProps } from "../../.next/types/app/page";
+import { Fullscreen } from "@mui/icons-material";
 
 const countries = {
   Sudamérica: [
@@ -61,7 +63,7 @@ const CountryList = () => {
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          className={`opacity-50 `}
+          className={`opacity-50`}
         />
       </div>
 

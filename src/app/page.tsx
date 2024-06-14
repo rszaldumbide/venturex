@@ -18,11 +18,15 @@ import MissionVisionComponent from "@/components/misionvision";
 import ServiceCard from "@/components/ServiceCard";
 import Footer from "@/components/Footer";
 import CountryList from "@/components/CountryList";
+import { Icon } from "@mui/material";
+/* react icons */
+import { FaWhatsapp } from "react-icons/fa";
 
 const images = [
-  "/imgs/carrousel/1.jpg",
-  "/imgs/carrousel/2.jpg",
-  "/imgs/carrousel/3.jpg",
+  { src: "/imgs/carrousel/1.jpg", text: "Plataforma de Comercio Internacional" },
+  { src: "/imgs/carrousel/2.jpg", text: "Datos Estadísticos de importaciones de negocios" },
+  { src: "/imgs/carrousel/3.jpg", text: "Conoce más sobre tus productos y su mercado" },
+  { src: "/imgs/carrousel/4.jpg", text: "Asesoría Legal y tributaria" },
 ];
 
 const valores = [
@@ -83,6 +87,8 @@ const servicios = [
   },
 ];
 
+
+
 function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -95,60 +101,50 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="m-1">
-      {/* nav bar */}
+    <div className="">
       <div>
         <NavbarHome />
       </div>
 
-      {/* carousel */}
+      
+      
       <div className="relative w-full" data-carousel="slide">
-        <Carousel className="m-4">
+        <Carousel className="mt-4">
           <CarouselContent>
             {images.map((image, index) => (
               <CarouselItem
                 key={index}
-                className={`transition-opacity duration-700 ease-in-out ${
-                  index === currentIndex ? "block" : "hidden"
-                }`}
+                className={`transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "block" : "hidden"}`}
               >
-                <Image
-                  src={image}
-                  alt={`VentureX ${index + 1}`}
-                  width={1400}
-                  height={600}
-                  className="rounded-lg"
-                />
+                <div className="relative w-full h-96"> 
+                  <Image
+                    src={image.src}
+                    alt={`VentureX ${index + 1}`}
+                    layout="fill"
+                    objectFit="cover"
+                    className=""
+                  />
+                  {/* Contenedor del texto */}
+                  <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-right">
+                    <h2 className="text-4xl font-bold text-white mb-4 text-right z-20">{image.text}</h2>
+                  </div>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious
-            onClick={() =>
-              setCurrentIndex(
-                (prevIndex) => (prevIndex - 1 + images.length) % images.length,
-              )
-            }
-          />
-          <CarouselNext
-            onClick={() =>
-              setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-            }
-          />
         </Carousel>
-        <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`h-3 w-3 rounded-full ${
-                index === currentIndex ? "bg-sky-900" : "bg-gray-300"
-              }`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Slide ${index + 1}`}
-            ></button>
-          ))}
-        </div>
+      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            className={`h-1 w-3 rounded-full ${index === currentIndex ? "bg-blue-800" : "bg-white"}`}
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
+        ))}
       </div>
+    </div>
 
       <br />
 
@@ -208,7 +204,7 @@ function HomePage() {
         </p>
         {/* wa.link */}
         <Button
-          className="mt-4"
+          className="mt-4 bg-green-400"
           onClick={() => {
             window.open(
               "https://wa.me/593963266372?text=Hola!%20somos%20*VentureX*,%20somos%20una%20plataforma%20digital%20que%20facilita%20la%20expansión%20internacional%20de%20empresas,%20en%20que%20te%20podemos%20ayudar?😀",
@@ -216,12 +212,14 @@ function HomePage() {
             );
           }}
         >
+          {/* icono de ws */}
+          <FaWhatsapp className="mr-2" />
           Contáctanos
         </Button>
       </div>
 
       <br />
-
+      <br />
       {/* paises */}
       <CountryList />
 

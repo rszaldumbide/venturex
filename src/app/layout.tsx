@@ -10,6 +10,13 @@ export const metadata = {
   description: "Comercio Internacional",
   //icon
   icon: "/Logo VentureX.svg",
+  //og
+  og: {
+    title: "Venturex",
+    description: "Comercio Internacional",
+    image: "/Logo VentureX.svg",
+  },
+  
 };
 
 export default function RootLayout({
@@ -18,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

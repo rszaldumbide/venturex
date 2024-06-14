@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Image from "next/image";
 
-type props = {
-  administrador: string;
-  email: string;
-  numero: number;
-};
 const handleClick = (link: string) => {
   window.open(link, "_blank");
 };
+
 const cards = [
   {
     title: "Investigación del Mercado",
@@ -33,11 +30,7 @@ const cards = [
   },
 ];
 
-export default function Dashboard({
-  administrador = "admin",
-  email,
-  numero,
-}: props) {
+export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Menú inicialmente cerrado
 
   const toggleMenu = () => {
@@ -50,13 +43,12 @@ export default function Dashboard({
         onClick={toggleMenu}
         className="fixed left-4 top-4 text-2xl text-white"
         title="open menu"
-
       >
         <i className="fas fa-bars"></i>
       </button>
 
       <aside
-        className={`fixed left-0 top-0 h-screen bg-green-600 w-64 transform bg-opacity-60 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed left-0 top-0 h-screen w-64 transform bg-cyan-600 bg-opacity-90 shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <button
           onClick={toggleMenu}
@@ -91,12 +83,20 @@ export default function Dashboard({
         </div>
       </aside>
       <header className="mb-8">
-        <h1 className="mb-4 text-center text-4xl font-bold">
-          Dashboard VentureX
-        </h1>
+        <div className="tex-center align-center flex justify-center">
+          <Image
+            src="/imgs/venturex.png"
+            alt="VentureX"
+            width={40}
+            height={40}
+          />
+          <h1 className="mb-4 text-center text-4xl font-bold">
+            Dashboard VentureX
+          </h1>
+        </div>
         <h3 className="flex justify-center space-x-4">
           {" "}
-          ¡Bienvenido de vuelta, {administrador}!
+          ¡Bienvenido de vuelta, Administrador!
         </h3>
       </header>
 
@@ -113,6 +113,10 @@ export default function Dashboard({
           </a>
         ))}
       </main>
+
+      <footer className="mt-8 text-center">
+        <p>© 2024 VentureX. Todos los derechos reservados.</p>
+      </footer>
     </div>
   );
 }

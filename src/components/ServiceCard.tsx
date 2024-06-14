@@ -18,9 +18,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   const { theme } = useTheme();
 
-  const cardBgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-cyan-50';
-  const textColor = theme === 'dark' ? 'text-white' : 'text-cyan-700';
-  const descColor = theme === 'dark' ? 'text-gray-400' : 'text-gray-600';
+  const cardBgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-cyan-900';
+  const textColor = theme === 'dark' ? 'text-white' : 'text-cyan-100';
+  const descColor = theme === 'dark' ? 'text-gray-400' : 'text-gray-400';
 
   return (
     <Card className={`transform transition-transform duration-300 hover:scale-105 drop-shadow-xl ${cardBgColor}`}>
